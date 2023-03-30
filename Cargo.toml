@@ -1,0 +1,8 @@
+[workspace]
+
+members = [
+    "cmd/app",
+    "internal",
+    "internal/domain",
+    "sdk"
+]
