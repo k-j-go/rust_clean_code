@@ -4,5 +4,11 @@ members = [
     "cmd/app",
     "internal",
     "internal/domain",
+    "internal/application",
+    "domain",
+    "application",
     "sdk"
 ]
+
+[workspace.dependencies]
+serde = { version = "1.0" }

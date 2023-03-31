@@ -1,4 +1,4 @@
-use internal_domain::blog_types::{Blog, BlogCommand};
+use internal_domain::blog_types::{Blog, BlogCommand, CommandType};
 
 pub struct Manager {
     name: &'static str,
@@ -7,8 +7,8 @@ pub struct Manager {
 pub trait BlogManager {
     fn new(name: &'static str) -> Self;
     fn name(&self) -> &'static str;
-    fn load_blog(&self, cmd: BlogCommand) -> Vec<Blog>;
-    fn create_blog(&self, cmd: BlogCommand) -> Blog;
+    fn load_blog(&self, cmd: BlogCommand) -> Option<Vec<Blog>>;
+    fn create_blog(&self, cmd: BlogCommand) -> Option<Blog>;
 }
 
 impl Manager {
@@ -27,12 +27,20 @@ impl BlogManager for Manager {
         self.name
     }
 
-    fn load_blog(&self, cmd: BlogCommand) -> Vec<Blog> {
-        return vec![Blog { name: cmd.name }];
+    fn load_blog(&self, cmd: BlogCommand) -> Option<Vec<Blog>> {
+        let action = cmd.action;
+        match action {
+            CommandType::Load =>  Some(vec![Blog { name: cmd.name }]),
+            _ => None
+        }
     }
 
-    fn create_blog(&self, cmd: BlogCommand) -> Blog {
-        return Blog { name: "created" }
+    fn create_blog(&self, cmd: BlogCommand) -> Option<Blog> {
+        let action = cmd.action;
+        match action {
+            CommandType::Create => Some(Blog { name: "created" }),
+            _ => None
+        }
     }
 }
 

@@ -1,3 +1,5 @@
+use std::fmt::{Display, Formatter};
+
 pub enum CommandType {
     Create,
     Load
@@ -6,6 +8,13 @@ pub enum CommandType {
 pub struct Blog {
     pub name: &'static str,
 }
+
+impl Display for Blog{
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.name )
+    }
+}
+
 
 pub struct BlogCommand {
     pub name: &'static str,
