@@ -1,3 +1,6 @@
+## about
+Try to create a rust pro.jec with clean code infrastructure
+
 #### create root folder
 ```shell
 cargo new cc1 --vcs=none
